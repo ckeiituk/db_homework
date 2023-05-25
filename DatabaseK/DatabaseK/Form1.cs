@@ -5,7 +5,6 @@ using System.Data.Common;
 
 namespace DatabaseK
 {
-    enum jobs { Инженер, Врач, Учитель };
     public partial class Form1 : Form
     {
 
@@ -16,9 +15,9 @@ namespace DatabaseK
             InitializeComponent();
 
         }
-
-        private void Form1_Load(object sender, EventArgs e)
+            private void Form1_Load(object sender, EventArgs e)
         {
+            string[] jobs = { "Инженер", "Врач", "Учитель" };
             var dbh = DBHelper.GetInstance(
                 "185.104.248.247",
                 "root",

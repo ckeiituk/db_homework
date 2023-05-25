@@ -20,6 +20,8 @@ namespace Database
         private int _salary;
         private int _jid;
 
+
+        [DisplayName("id")]
         public int EId { get => _eid;
             set 
             {
@@ -30,9 +32,10 @@ namespace Database
         [DisplayName("Имя")]
         public string First_name 
         {
-            get => _first_name ;
+            get => _first_name ; 
             set
             {
+                if (string.IsNullOrEmpty(value)) throw new Exception("Введите имя!");
                 _first_name  = value;
                 OnPropertyChanged(nameof(First_name ));
             }
@@ -40,8 +43,13 @@ namespace Database
         [DisplayName("Фамилия")]
         public string Second_name
         {
+
             get => _second_name;
-            set { _second_name = value; OnPropertyChanged(nameof(Second_name)); }
+            set {
+                if (value == "") throw new Exception("Введите фамилию!");
+                _second_name = value;
+                OnPropertyChanged(nameof(Second_name));
+            }
         }
         [DisplayName("Номер телефона")]
         public string Phone_number
@@ -49,7 +57,7 @@ namespace Database
             get => _phone;
             set
             {
-                //if (value[0] != '+') throw new Exception("Неправильный формат номера телефона");
+                if (value[0] != '+' || value.Length != 12) throw new Exception("Неправильный формат номера телефона");
                 _phone = value;
                 OnPropertyChanged(nameof(Phone_number));
 
@@ -64,6 +72,7 @@ namespace Database
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
         }
+        [DisplayName("Профессия")]
         public int Job_id
         {
             get => _jid;

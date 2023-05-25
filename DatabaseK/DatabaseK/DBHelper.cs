@@ -31,7 +31,7 @@ namespace Database
         public static DBHelper GetInstance(
             String host = "185.104.248.247",
             String user = "root",
-            String password = "password",
+            String password = "pass",
             String database = "persons"
             )
         {
@@ -89,8 +89,8 @@ namespace Database
                 "SET `first_name` = @name, " +
                 "`second_name` = @sname, " +
                 "`phone_number` =  @phone, " +
-                "`salary` = @salary " +
-                "`job_id` = " +
+                "`salary` = @salary, " +
+                "`job_id` = @jid " +
                 "WHERE `eid` = @id;";
             cmd.Parameters.Add(new MySqlParameter("@id", newEmp.EId));
             cmd.Parameters.Add(new MySqlParameter("@name", newEmp.First_name ));

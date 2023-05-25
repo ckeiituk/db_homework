@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "YuJmz0R6YP+gPS/zQt5iSFEvS2y8guBcmldzi3C8Ayo5UghjzQxZ5Ey94eOb66Eywpx8d3o2PaO7oTOZK37P3Q==",
+  "dgSpecHash": "R4NMV5I5mKwOlCOadgKxj03hibBdZy8XfLGXYw3qYYiZ1ohkXoscnCAIvH3Tw5FXfGll6suzfjwrEOZDvAvLiA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\TRTukhvatullin\\Desktop\\kpfu-main\\DatabaseK\\DatabaseK\\DatabaseK.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "C:\\Users\\ckeii\\source\\repos\\DatabaseK\\DatabaseK\\DatabaseK.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\ckeii\\.nuget\\packages\\mysqlconnector\\2.2.5\\mysqlconnector.2.2.5.nupkg.sha512"
+  ],
   "logs": []
 }

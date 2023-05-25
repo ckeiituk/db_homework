@@ -21,10 +21,14 @@ namespace DatabaseK
             this.newRow = newRow;
             InitializeComponent();
             _emp = emp;
-            textBox1.DataBindings.Add(nameof(TextBox.Text), _emp, nameof(Employee.First_name));
-            textBox2.DataBindings.Add(nameof(TextBox.Text), _emp, nameof(Employee.Second_name));
-            var cBinding = numericUpDown2.DataBindings.Add(nameof(NumericUpDown.Value), _emp, nameof(Employee.Salary));
-            textBox4.DataBindings.Add(nameof(TextBox.Text), _emp, nameof(Employee.Phone_number));
+            var cB1 = textBox1.DataBindings.Add(nameof(TextBox.Text), _emp, nameof(Employee.First_name));
+            cB1.FormattingEnabled = true;
+            cB1.BindingComplete += CBinding_BindingComplete;
+            var cB2 = textBox2.DataBindings.Add(nameof(TextBox.Text), _emp, nameof(Employee.Second_name));
+            cB2.FormattingEnabled = true;
+            cB2.BindingComplete += CBinding_BindingComplete;
+            numericUpDown2.DataBindings.Add(nameof(NumericUpDown.Value), _emp, nameof(Employee.Salary));
+            var cBinding = textBox4.DataBindings.Add(nameof(TextBox.Text), _emp, nameof(Employee.Phone_number));
             comboBox1.DataBindings.Add(nameof(ComboBox.SelectedIndex), _emp, nameof(Employee.Job_id));
             cBinding.FormattingEnabled = true;
             cBinding.BindingComplete += CBinding_BindingComplete;
@@ -34,9 +38,20 @@ namespace DatabaseK
         {
             if (e.BindingCompleteState == BindingCompleteState.Exception)
             {
+                if ("Неправильный формат номера телефона" == e.Exception.Message)
+                {
+                    // e.BindingCompleteContext == BindingCompleteContext.DataSourceUpdate;
+                    textBox4.BackColor = Color.LightCoral;
+                }
+                else if ("Введите фамилию!" == e.Exception.Message)
+                {
+                    textBox2.BackColor = Color.LightCoral;
+                }
+                else if ("Введите имя!" == e.Exception.Message)
+                {
+                    textBox1.BackColor = Color.LightCoral;
+                }
                 e.Cancel = false;
-                // e.BindingCompleteContext == BindingCompleteContext.DataSourceUpdate;
-                textBox4.BackColor = Color.LightCoral;
             }
             _bindingException = e.Exception;
         }
@@ -45,6 +60,12 @@ namespace DatabaseK
         {
             try
             {
+                if (string.IsNullOrEmpty(_emp.First_name))
+                    textBox1.BackColor = Color.LightCoral;
+                if (string.IsNullOrEmpty(_emp.Second_name))
+                    textBox2.BackColor = Color.LightCoral;
+                if (string.IsNullOrEmpty(_emp.First_name))
+                    textBox4.BackColor = Color.LightCoral;
                 if (_bindingException != null)
                 {
                     MessageBox.Show("Неверно указаны данные!");
@@ -70,7 +91,22 @@ namespace DatabaseK
 
         private void textBox4_KeyPress(object sender, KeyPressEventArgs e)
         {
-            e.Handled = !(Char.IsNumber(e.KeyChar) || e.KeyChar == 8);
+            //e.Handled = !(Char.IsNumber(e.KeyChar) || e.KeyChar == 8);
+        }
+
+        private void textBox4_TextChanged(object sender, EventArgs e)
+        {
+            textBox4.BackColor = Color.White;
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            textBox1.BackColor = Color.White;
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+            textBox2.BackColor = Color.White;
         }
     }
 }
